@@ -1,4 +1,4 @@
-async function loadArticles(){
+async function loadArticles() {
   const response = await fetch("data/articles.json");
   const articles = await response.json();
 
@@ -12,33 +12,40 @@ async function loadArticles(){
   //The same as:
   // fetch("data/users.json").then(response => {
   // });
-
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  let articles = []
+  let articles = [];
   try {
     articles = await loadArticles();
   } catch (e) {
-    console.log("error")
-    console.log(e)
+    console.log("error");
+    console.log(e);
   }
 
-  articles.map((article)=>{
-    var theDiv = document.getElementsByClassName('articles-list')[0];
+  articles.map((article) => {
+    var theDiv = document.getElementsByClassName("articles-list")[0];
 
-    var newNode = document.createElement('div');
+    var newNode = document.createElement("div");
     newNode.setAttribute("class", "article");
     theDiv.appendChild(newNode);
 
-    var newNodeTitle = document.createElement('div');
+    var newNodeTitle = document.createElement("div");
     newNodeTitle.setAttribute("class", "article-title");
     newNodeTitle.innerHTML = `Article Title: ${article.title}`;
     newNode.appendChild(newNodeTitle);
 
-    var newNodeContent = document.createElement('div');
+    var newNodeContent = document.createElement("div");
     newNodeContent.setAttribute("class", "article-content");
     newNodeContent.innerHTML = `Article Content: ${article.content}`;
     newNode.appendChild(newNodeContent);
-  })
-})
+  });
+});
+
+const displayData = async () => {
+  const data = await fetch("data/users.json");
+  const jsonData = await data.json();
+  console.log(jsonData);
+};
+
+displayData();
